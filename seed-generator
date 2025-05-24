@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Seed Prompt Viewer</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: #111; color: #fff; }
+    select, textarea { width: 100%; padding: 10px; margin-top: 10px; font-size: 16px; }
+    .card { background: #222; padding: 20px; border-radius: 10px; margin-top: 20px; }
+    h2 { color: #87cefa; }
+  </style>
+</head>
+<body>
+  <h1>Image Seed Prompt Generator</h1>
+  <label for="character">Select Character:</label>
+  <select id="character" onchange="showData()">
+    <option value="">-- Choose --</option>
+    <option value="anastasia">Anastasia Velvet</option>
+    <option value="lia">Lia Monroe</option>
+  </select>
+
+  <div id="output" class="card" style="display:none;">
+    <h2 id="charName"></h2>
+    <p><strong>Seed:</strong> <span id="seed"></span></p>
+    <p><strong>Prompt:</strong></p>
+    <textarea id="prompt" rows="5" readonly></textarea>
+  </div>
+
+  <script>
+    const data = {
+      anastasia: {
+        name: "Anastasia Velvet",
+        seed: "847007578",
+        prompt: "((portrait)), cinematic lighting, pale skin, silver-blonde hair, sharp cheekbones, emerald green eyes, soft makeup, relaxed expression, LORA:anastasia_style"
+      },
+      lia: {
+        name: "Lia Monroe",
+        seed: "77989000",
+        prompt: "((portrait)), vibrant lighting, freckled skin, auburn waves, deep blue eyes, playful smile, minimal makeup, LORA:lia_monroe_style"
+      }
+    };
+
+    function showData() {
+      const select = document.getElementById("character").value;
+      const output = document.getElementById("output");
+      if (data[select]) {
+        document.getElementById("charName").textContent = data[select].name;
+        document.getElementById("seed").textContent = data[select].seed;
+        document.getElementById("prompt").value = data[select].prompt;
+        output.style.display = "block";
+      } else {
+        output.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
